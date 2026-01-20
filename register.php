@@ -21,15 +21,17 @@ $userEmail = $_POST['email'];
 // Hash the user's password before storing it
 $hashedPassword = password_hash($userPassword, PASSWORD_BCRYPT);
 
-// SQL query to insert the new user
-$query = "INSERT INTO uzytkownik (login, haslo, imie, nazwisko, email) 
-          VALUES ('$userLogin', '$hashedPassword', '$userName', '$userSurname', '$userEmail)";
+// Use prepared statement to prevent SQL injection
+$stmt = mysqli_prepare($connection, "INSERT INTO uzytkownik (login, haslo, imie, nazwisko, email) VALUES (?, ?, ?, ?, ?)");
+mysqli_stmt_bind_param($stmt, "sssss", $userLogin, $hashedPassword, $userName, $userSurname, $userEmail);
 
-if (mysqli_query($connection, $query)) {
+if (mysqli_stmt_execute($stmt)) {
     echo "Registration successful!";
 } else {
-    echo "Error: " . mysqli_error($connection);
+    echo "Error: " . mysqli_stmt_error($stmt);
 }
+
+mysqli_stmt_close($stmt);
 
 mysqli_close($connection);
 ?>

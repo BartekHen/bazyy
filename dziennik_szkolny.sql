@@ -287,17 +287,17 @@ CREATE TABLE `uzytkownik` (
 --
 
 INSERT INTO `uzytkownik` (`id_uzytkownika`, `login`, `haslo`, `imie`, `nazwisko`, `email`, `czy_aktywny`, `rola`, `telefon`) VALUES
-(1, 'admin', 'admin123', 'Jan', 'Administrator', 'admin@szkola.pl', 'TAK', 'admin', NULL),
-(4, 'jkowal', 'szkola123', 'Jan', 'Kowal', 'eee@gmail.com', 'TAK', 'nauczyciel', '44444444'),
-(5, 'jkowal88', 'uczen123', 'jan', 'kowal', 'jkowal88@szkola.pl', 'TAK', 'uczen', NULL),
-(7, 'jan.nowak60@szkola.pl', 'start123', 'Jan', 'Nowak', 'jan.nowak60@szkola.pl', 'TAK', 'uczen', NULL),
-(10, 'jan.dab952@szkola.pl', 'start123', 'Jan', 'Dąb', 'jan.dab952@szkola.pl', 'TAK', 'rodzic', NULL),
-(13, 'karol.kos317@szkola.pl', 'start123', 'Karol', 'Kos', 'karol.kos317@szkola.pl', 'TAK', 'rodzic', NULL),
-(16, 'andrzej.kaczor215@szkola.pl', 'start123', 'Andrzej', 'Kaczor', 'andrzej.kaczor215@szkola.pl', 'TAK', 'rodzic', NULL),
-(18, 'annakowal941@szkola.pl', 'start123', 'Anna', 'Kowal', 'annakowal941@szkola.pl', 'TAK', 'uczen', NULL),
-(19, 'piotrzielinski148@szkola.pl', 'start123', 'Piotr', 'Zieliński', 'piotrzielinski148@szkola.pl', 'TAK', 'uczen', NULL),
-(20, 'abąk', 'szkola123', 'Agata', 'Bąk', 'abak@szkola.com', 'TAK', 'nauczyciel', NULL),
-(21, 'ajastrząb', 'szkola123', 'Aneta', 'Jastrząb', 'aneta.jastrzab@szkola.pl', 'TAK', 'sekretariat', NULL);
+(1, 'admin', '$2y$10$uysowCcq7dARcuNRuKIT9ONFRSR.jninGDU4H3gVwLWn5gzJcvMkC', 'Jan', 'Administrator', 'admin@szkola.pl', 'TAK', 'admin', NULL),
+(4, 'jkowal', '$2y$10$2hZti9DoerAnBgAexpy0yue8GZg8ITpEBax4VotNVKVqEB9cT/t5m', 'Jan', 'Kowal', 'eee@gmail.com', 'TAK', 'nauczyciel', '44444444'),
+(5, 'jkowal88', '$2y$10$LdTq8Bz2hNd/.xI16fbiReMYLzU5hS36rGLzkRe4USu.0gbNFHr2m', 'jan', 'kowal', 'jkowal88@szkola.pl', 'TAK', 'uczen', NULL),
+(7, 'jan.nowak60@szkola.pl', '$2y$10$Kgqs1aXjOJhWqy0gGXUD/.ulZWVxIgyyHNbLGgyP1lc/M.hkpBoZ2', 'Jan', 'Nowak', 'jan.nowak60@szkola.pl', 'TAK', 'uczen', NULL),
+(10, 'jan.dab952@szkola.pl', '$2y$10$Kgqs1aXjOJhWqy0gGXUD/.ulZWVxIgyyHNbLGgyP1lc/M.hkpBoZ2', 'Jan', 'Dąb', 'jan.dab952@szkola.pl', 'TAK', 'rodzic', NULL),
+(13, 'karol.kos317@szkola.pl', '$2y$10$Kgqs1aXjOJhWqy0gGXUD/.ulZWVxIgyyHNbLGgyP1lc/M.hkpBoZ2', 'Karol', 'Kos', 'karol.kos317@szkola.pl', 'TAK', 'rodzic', NULL),
+(16, 'andrzej.kaczor215@szkola.pl', '$2y$10$Kgqs1aXjOJhWqy0gGXUD/.ulZWVxIgyyHNbLGgyP1lc/M.hkpBoZ2', 'Andrzej', 'Kaczor', 'andrzej.kaczor215@szkola.pl', 'TAK', 'rodzic', NULL),
+(18, 'annakowal941@szkola.pl', '$2y$10$Kgqs1aXjOJhWqy0gGXUD/.ulZWVxIgyyHNbLGgyP1lc/M.hkpBoZ2', 'Anna', 'Kowal', 'annakowal941@szkola.pl', 'TAK', 'uczen', NULL),
+(19, 'piotrzielinski148@szkola.pl', '$2y$10$Kgqs1aXjOJhWqy0gGXUD/.ulZWVxIgyyHNbLGgyP1lc/M.hkpBoZ2', 'Piotr', 'Zieliński', 'piotrzielinski148@szkola.pl', 'TAK', 'uczen', NULL),
+(20, 'abąk', '$2y$10$2hZti9DoerAnBgAexpy0yue8GZg8ITpEBax4VotNVKVqEB9cT/t5m', 'Agata', 'Bąk', 'abak@szkola.com', 'TAK', 'nauczyciel', NULL),
+(21, 'ajastrząb', '$2y$10$2hZti9DoerAnBgAexpy0yue8GZg8ITpEBax4VotNVKVqEB9cT/t5m', 'Aneta', 'Jastrząb', 'aneta.jastrzab@szkola.pl', 'TAK', 'sekretariat', NULL);
 
 --
 -- Indeksy dla zrzutów tabel

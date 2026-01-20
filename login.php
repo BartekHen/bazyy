@@ -15,9 +15,11 @@ if (!$connection) {
 $userLogin = $_POST['login'];
 $userPassword = $_POST['password'];
 
-// SQL query to fetch the stored hashed password
-$query = "SELECT haslo FROM uzytkownik WHERE login = '$userLogin'";
-$result = mysqli_query($connection, $query);
+// Use prepared statement to prevent SQL injection
+$stmt = mysqli_prepare($connection, "SELECT haslo FROM uzytkownik WHERE login = ?");
+mysqli_stmt_bind_param($stmt, "s", $userLogin);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
 
 if ($row = mysqli_fetch_assoc($result)) {
     $storedHashedPassword = $row['haslo'];
@@ -31,6 +33,8 @@ if ($row = mysqli_fetch_assoc($result)) {
 } else {
     echo "User not found!";
 }
+
+mysqli_stmt_close($stmt);
 
 mysqli_close($connection);
 ?>
