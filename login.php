@@ -11,6 +11,11 @@ if (!$connection) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
+// Check if form was submitted
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    die("Error: Invalid request method. Please submit the login form.");
+}
+
 // Example user input
 $userLogin = $_POST['login'] ?? '';
 $userPassword = $_POST['password'] ?? '';
