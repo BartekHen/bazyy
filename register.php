@@ -11,25 +11,45 @@ if (!$connection) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
+// Check if form was submitted
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    die("Error: Invalid request method. Please submit the registration form.");
+}
+
 // Example user input
-$userLogin = $_POST['login'];
-$userPassword = $_POST['password'];
-$userName = $_POST['name'];
-$userSurname = $_POST['surname'];
-$userEmail = $_POST['email'];
+$userLogin = $_POST['login'] ?? '';
+$userPassword = $_POST['password'] ?? '';
+$userName = $_POST['name'] ?? '';
+$userSurname = $_POST['surname'] ?? '';
+$userEmail = $_POST['email'] ?? '';
+
+// Input validation
+if (empty($userLogin) || empty($userPassword) || empty($userName) || empty($userSurname) || empty($userEmail)) {
+    die("Error: All fields are required!");
+}
+
+if (strlen($userPassword) < 8) {
+    die("Error: Password must be at least 8 characters long!");
+}
+
+if (!filter_var($userEmail, FILTER_VALIDATE_EMAIL)) {
+    die("Error: Invalid email format!");
+}
 
 // Hash the user's password before storing it
 $hashedPassword = password_hash($userPassword, PASSWORD_BCRYPT);
 
-// SQL query to insert the new user
-$query = "INSERT INTO uzytkownik (login, haslo, imie, nazwisko, email) 
-          VALUES ('$userLogin', '$hashedPassword', '$userName', '$userSurname', '$userEmail)";
+// Use prepared statement to prevent SQL injection
+$stmt = mysqli_prepare($connection, "INSERT INTO uzytkownik (login, haslo, imie, nazwisko, email) VALUES (?, ?, ?, ?, ?)");
+mysqli_stmt_bind_param($stmt, "sssss", $userLogin, $hashedPassword, $userName, $userSurname, $userEmail);
 
-if (mysqli_query($connection, $query)) {
+if (mysqli_stmt_execute($stmt)) {
     echo "Registration successful!";
 } else {
-    echo "Error: " . mysqli_error($connection);
+    echo "Error: " . mysqli_stmt_error($stmt);
 }
+
+mysqli_stmt_close($stmt);
 
 mysqli_close($connection);
 ?>

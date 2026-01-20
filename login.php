@@ -11,13 +11,25 @@ if (!$connection) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-// Example user input
-$userLogin = $_POST['login'];
-$userPassword = $_POST['password'];
+// Check if form was submitted
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    die("Error: Invalid request method. Please submit the login form.");
+}
 
-// SQL query to fetch the stored hashed password
-$query = "SELECT haslo FROM uzytkownik WHERE login = '$userLogin'";
-$result = mysqli_query($connection, $query);
+// Example user input
+$userLogin = $_POST['login'] ?? '';
+$userPassword = $_POST['password'] ?? '';
+
+// Input validation
+if (empty($userLogin) || empty($userPassword)) {
+    die("Error: Login and password are required!");
+}
+
+// Use prepared statement to prevent SQL injection
+$stmt = mysqli_prepare($connection, "SELECT haslo FROM uzytkownik WHERE login = ?");
+mysqli_stmt_bind_param($stmt, "s", $userLogin);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
 
 if ($row = mysqli_fetch_assoc($result)) {
     $storedHashedPassword = $row['haslo'];
@@ -31,6 +43,8 @@ if ($row = mysqli_fetch_assoc($result)) {
 } else {
     echo "User not found!";
 }
+
+mysqli_stmt_close($stmt);
 
 mysqli_close($connection);
 ?>
