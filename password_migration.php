@@ -13,7 +13,7 @@ if (!$connection) {
 
 // Helper function to check if a password is already hashed
 function isPasswordHashed($password) {
-    return preg_match('/^\$2[ayb]\$/', $password) === 1;
+    return preg_match('/^\$2[ayb]\$\d{2}\$/', $password) === 1;
 }
 
 // Fetch all users
