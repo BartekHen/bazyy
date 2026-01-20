@@ -11,6 +11,11 @@ if (!$connection) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
+// Helper function to check if a password is already hashed
+function isPasswordHashed($password) {
+    return preg_match('/^\$2[ayb]\$/', $password) === 1;
+}
+
 // Fetch all users
 $query = "SELECT id_uzytkownika, haslo FROM uzytkownik";
 $result = mysqli_query($connection, $query);
@@ -22,8 +27,8 @@ while ($row = mysqli_fetch_assoc($result)) {
     $userId = $row['id_uzytkownika'];
     $password = $row['haslo'];
     
-    // Check if password is already hashed (bcrypt hashes start with $2y$)
-    if (substr($password, 0, 4) === '$2y$' || substr($password, 0, 4) === '$2a$' || substr($password, 0, 4) === '$2b$') {
+    // Check if password is already hashed
+    if (isPasswordHashed($password)) {
         $skipped++;
         continue;
     }

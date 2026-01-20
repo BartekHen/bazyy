@@ -12,8 +12,13 @@ if (!$connection) {
 }
 
 // Example user input
-$userLogin = $_POST['login'];
-$userPassword = $_POST['password'];
+$userLogin = $_POST['login'] ?? '';
+$userPassword = $_POST['password'] ?? '';
+
+// Input validation
+if (empty($userLogin) || empty($userPassword)) {
+    die("Error: Login and password are required!");
+}
 
 // Use prepared statement to prevent SQL injection
 $stmt = mysqli_prepare($connection, "SELECT haslo FROM uzytkownik WHERE login = ?");
